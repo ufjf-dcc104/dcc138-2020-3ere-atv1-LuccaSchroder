@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DCC138 e.xemplo01</title>
+    <title>DCC138 exemplo01</title>
 </head>
 <body>
-    <h1>DCC138 e.xemplo01</h1>
+    <h1>DCC138 exemplo01</h1>
     <canvas></canvas>
     <p>por Lucca Oliveira (2020)</p>
     <script>
@@ -15,12 +15,16 @@
         canvas.width = 480;
         canvas.height = 320;
         let p = {
-            x : 150,
-            vx : 0,
-            ax : 0,
-            y  : 100,
-            vy : 0,
-            ay : 0
+            x: 150,
+            vx: 0,
+            ax: 0,
+            y: 100,
+            vy: 0,
+            ay: 0,
+            desenhar: function(){
+                ctx.fillStyle = "white";
+                ctx.fillRect(this.x, this.y, 20, 20);
+            }
         };
 
         let e = {
@@ -29,7 +33,11 @@
             ax: 0,
             y: 200,
             vy: 0,
-            ay: 0
+            ay: 0,
+            desenhar: function(){
+                ctx.fillStyle = "red";
+                ctx.fillRect(this.x, this.y, 20, 20);
+            }
         }
 
 
@@ -61,11 +69,9 @@
             e.y = e.y + e.vy*dt;
 
             // Desenha elementos
-            ctx.fillStyle = "white";
-            ctx.fillRect(p.x, p.y, 20, 20);
+            p.desenhar();
 
-            ctx.fillStyle = "red";
-            ctx.fillRect(e.x, e.y, 20, 20);
+            e.desenhar();
 
             requestAnimationFrame(desenha);
             t0 = t;
@@ -96,23 +102,17 @@
         function teclaSolta(event) {
             // Adiciona controle de velocidades
             console.log(event.key);
-
-            
             switch (event.key) {
                 case "ArrowUp":
-                    p.vy = 0;
                     p.ay = 0;
                     break;
                 case "ArrowDown":
-                    p.vy = 0;
                     p.ay = 0;
                     break;
                 case "ArrowLeft":
-                    p.vx = 0;
                     p.ax = 0;
                     break;
                 case "ArrowRight":
-                    p.vx = 0;
                     p.ax = 0;
                     break;
             }
